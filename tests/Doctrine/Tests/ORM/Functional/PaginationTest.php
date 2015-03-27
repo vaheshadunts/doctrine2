@@ -395,12 +395,12 @@ class PaginationTest extends \Doctrine\Tests\OrmFunctionalTestCase
     public function testIterateResultWithOrderIsValid($useOutputWalkers)
     {
         $dql = 'SELECT c, d FROM Doctrine\Tests\Models\Pagination\Company c JOIN c.departments d ORDER BY c.name DESC, d.name ASC';
-        $query = $this->_em->createQuery($dql); 
-        $query -> setMaxResults(3);
+        $query = $this->_em->createQuery($dql);
+        $query -> setFirstResult(1) -> setMaxResults(3);
         assertEquals($query->getMaxResults(),3);
         $paginator = new Paginator($query);
         $paginator->setUseOutputWalkers($useOutputWalkers);
-        $this->assertCount(3, $paginator);
+        $this->assertCount(9, $paginator);
         $iter = $paginator->getIterator();
         $this->assertCount(3, $iter);
         $i = 9;
