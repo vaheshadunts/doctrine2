@@ -402,11 +402,11 @@ class PaginationTest extends \Doctrine\Tests\OrmFunctionalTestCase
         $this->assertCount(3, $paginator);
         $iter = $paginator->getIterator();
         $this->assertCount(3, $iter);
-        $i = 2;
+        $i = 9;
         $companies = iterator_to_array($iter);
         $this->assertCount(3, $companies);
         foreach($companies as $company) {
-            $this->assertEquals("name" . $i--, $company->name);
+            $this->assertEquals("name" . --$i, $company->name);
             $this->assertCount(3, $company->departments);
             $j = 0;
             foreach($company->departments as $department) {

@@ -98,6 +98,11 @@ abstract class OrmFunctionalTestCase extends OrmTestCase
             'Doctrine\Tests\Models\Company\CompanyCar',
             'Doctrine\Tests\Models\Company\CompanyContract',
         ),
+        'pagination' => array(
+            'Doctrine\Tests\Models\Pagination\Company',
+            'Doctrine\Tests\Models\Pagination\Logo',
+            'Doctrine\Tests\Models\Pagination\Department',
+        ),
         'ecommerce' => array(
             'Doctrine\Tests\Models\ECommerce\ECommerceCart',
             'Doctrine\Tests\Models\ECommerce\ECommerceCustomer',
@@ -315,7 +320,11 @@ abstract class OrmFunctionalTestCase extends OrmTestCase
             $conn->executeUpdate('DELETE FROM company_events');
             $conn->executeUpdate('DELETE FROM company_organizations');
         }
-
+        if (isset($this->_usedModelSets['pagination'])) {
+            $conn->executeUpdate('DELETE FROM pagination_logo');
+            $conn->executeUpdate('DELETE FROM pagination_department');
+            $conn->executeUpdate('DELETE FROM pagination_company');
+        }
         if (isset($this->_usedModelSets['generic'])) {
             $conn->executeUpdate('DELETE FROM boolean_model');
             $conn->executeUpdate('DELETE FROM date_time_model');
